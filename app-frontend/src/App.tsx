@@ -20,32 +20,25 @@ export default function App() {
   const API_URL =
     import.meta.env.VITE_API_URL || "http://127.0.0.1:8000";
 
-  async function refresh() {
-  setShowLoader(true); // показываем лоадер
+async function refresh() {
+  setShowLoader(true);
   setData(null);
   setVisibleFields([]);
 
   const result = await fetch(`${API_URL}/unique`);
   const json = await result.json();
 
-  // ждём завершения лоадера
-  const waitForLoader = new Promise<void>((resolve) => {
-    const check = () => {
-      if (!showLoader) resolve();
-      else setTimeout(check, 50);
-    };
-    check();
-  });
+  setData(json); // сразу сохраняем данные
 
-  await waitForLoader;
-
-  setData(json);
-
+  // показываем поля по анимации
   Object.keys(json).forEach((key, i) => {
     setTimeout(() => {
       setVisibleFields((prev) => [...prev, key]);
     }, 250 * i);
   });
+
+  // показываем лоадер поверх
+  setShowLoader(true);
 }
 
 
