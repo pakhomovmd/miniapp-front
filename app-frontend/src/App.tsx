@@ -15,7 +15,6 @@ interface UniqueData {
 export default function App() {
   const [data, setData] = useState<UniqueData | null>(null);
   const [visibleFields, setVisibleFields] = useState<string[]>([]);
-  const [loading, setLoading] = useState(false);
   const [showLoader, setShowLoader] = useState(false);
 
   const API_URL =
