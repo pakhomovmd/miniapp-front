@@ -1,0 +1,238 @@
+/* === ОБЩИЕ НАСТРОЙКИ === */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #0f0f12;
+  font-family: "Inter", sans-serif;
+  color: #ffffff;
+  -webkit-font-smoothing: antialiased;
+}
+
+.app-wrapper {
+  max-width: 420px;
+  margin: 0 auto;
+  padding: 28px 20px;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+
+/* === ТЕКСТ === */
+
+.title {
+  font-size: 28px;
+  font-weight: 700;
+  background: linear-gradient(90deg, #4f46e5, #9333ea);
+  -webkit-background-clip: text;
+  color: transparent;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  font-size: 14px;
+  opacity: 0.65;
+  margin-bottom: 26px;
+  line-height: 1.4;
+}
+
+
+/* === КАРТОЧКА === */
+
+.card {
+  background: rgba(22, 22, 26, 0.7); /* прозрачный фон */
+  padding: 22px;
+  border-radius: 14px;
+  min-height: 150px;
+  width: 100%;
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.45);
+  margin-bottom: 22px;
+  position: relative;
+  backdrop-filter: blur(6px); /* немного размытия фона для читаемости */
+}
+
+.field-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.field {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 14px;
+  background: #1e1e23;
+  border-radius: 10px;
+
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.field.animate {
+  animation: fadeInMove 0.35s ease-out forwards;
+}
+
+.field-key {
+  font-size: 13px;
+  opacity: 0.55;
+}
+
+.field-value {
+  font-size: 14px;
+  font-weight: 600;
+  word-break: break-all;
+}
+
+
+/* === КНОПКА === */
+
+.action-btn {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(90deg, #4f46e5, #9333ea);
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.action-btn:hover:not(:disabled) {
+  filter: brightness(1.12);
+}
+
+.action-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+
+/* === ЛОАДЕР === */
+
+.loader {
+  width: 90%;
+  max-width: 420px;
+  background: rgba(22, 22, 26, 0.7); /* прозрачный фон */
+  padding: 26px;
+  border-radius: 14px;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.5);
+  text-align: left;
+  backdrop-filter: blur(6px); /* размытие под фон */
+}
+
+
+/* === АНИМАЦИИ === */
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fadeInMove {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* === LOADING SCREEN === */
+
+.loading-wrapper {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loading-card {
+  width: 90%;
+  max-width: 420px;
+  background: #16161a;
+  padding: 26px;
+  border-radius: 14px;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.5);
+  text-align: left;
+}
+
+.progress-bar {
+  height: 6px;
+  background: #222228;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 18px;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #4f46e5, #9333ea);
+  transition: width 0.3s;
+}
+
+.loading-text {
+  font-size: 15px;
+  margin-bottom: 16px;
+  opacity: 0.85;
+}
+
+.terminal-window {
+  background: #0e0e11;
+  border-radius: 10px;
+  padding: 14px;
+  max-height: 200px;
+  overflow: hidden;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 13px;
+  color: #b9b9c5;
+  border: 1px solid #1f1f24;
+}
+
+.terminal-line {
+  opacity: 0;
+  animation: fadeInTerm 0.4s forwards;
+}
+
+@keyframes fadeInTerm {
+  to {
+    opacity: 1;
+  }
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.background-logo {
+  position: absolute;
+  left: 50%;
+  width: 600px;
+  height: 600px;
+  transform: translateX(-50%);
+  opacity: 0.3;
+  pointer-events: none;
+  z-index: 0;
+  transition: top 0.5s ease;
+}
+
+/* Логотип когда данных нет */
+.lower-logo {
+  top: 0px; /* чуть ниже заголовка */
+}
+
+/* Логотип когда данные есть */
+.center-logo {
+  top: 50%; /* центр экрана */
+  transform: translate(-50%, -50%);
+}
+
