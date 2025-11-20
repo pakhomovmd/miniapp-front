@@ -42,9 +42,7 @@ async function refresh() {
 }
 
 
-  if (showLoader) {
-    return <LoadingScreen onComplete={() => setShowLoader(false)} />;
-  }
+<LoadingScreen onComplete={() => setShowLoader(false)} />
 
   return (
     <div className="app-wrapper">
