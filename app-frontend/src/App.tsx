@@ -20,30 +20,38 @@ export default function App() {
   const API_URL =
     import.meta.env.VITE_API_URL || "http://127.0.0.1:8000";
 
-async function refresh() {
-  setShowLoader(true);
+  async function refresh() {
+  setShowLoader(true); // показываем лоадер
   setData(null);
   setVisibleFields([]);
 
   const result = await fetch(`${API_URL}/unique`);
   const json = await result.json();
 
-  setData(json); // сразу сохраняем данные
+  // ждём завершения лоадера
+  const waitForLoader = new Promise<void>((resolve) => {
+    const check = () => {
+      if (!showLoader) resolve();
+      else setTimeout(check, 50);
+    };
+    check();
+  });
 
-  // показываем поля по анимации
+  await waitForLoader;
+
+  setData(json);
+
   Object.keys(json).forEach((key, i) => {
     setTimeout(() => {
       setVisibleFields((prev) => [...prev, key]);
     }, 250 * i);
   });
-
-  // показываем лоадер поверх
-  setShowLoader(true);
 }
 
 
-<LoadingScreen onComplete={() => setShowLoader(false)} />
-
+  if (showLoader) {
+    return <LoadingScreen onComplete={() => setShowLoader(false)} />;
+  }
   return (
     <div className="app-wrapper">
         <img src={logo} alt="Logo" className={`background-logo ${data ? "center-logo" : "lower-logo"}`} />
